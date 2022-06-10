@@ -82,9 +82,15 @@ main {
     flex-grow: 1;
     flex-basis: 300px;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 10px;
     position: relative;
     text-align: center;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
 }
 
 .location-photo {
@@ -92,6 +98,7 @@ main {
     height: 100%;
     object-fit: cover;
 }
+
 
 .location {
     width: 100%;
@@ -103,6 +110,8 @@ main {
 button {
     margin: 20px 0;
     padding: 10px;
+    border-radius: 10px;
+    background-color: azure;
 }
 
 /* ------ footer ------ */
