@@ -27,7 +27,16 @@ header {
 }
 
 .title-container {
-    min-width: 20%;
+    min-width: 10%;
+}
+
+#title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#logo {
+    width: 30px;
 }
 
 ul {
@@ -48,7 +57,8 @@ li {
     padding: 50px 0;
     width: 100vw;
     height: 150px;
-    background-color:lightslategrey;
+    background-color:aliceblue;
+    box-shadow: 0px 3px 5px 5px rgba(0,0,0,0.2);
     text-align: center;
 }
 
@@ -77,7 +87,7 @@ main {
     text-align: center;
 }
 
-img {
+.location-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
