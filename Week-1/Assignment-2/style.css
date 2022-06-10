@@ -27,7 +27,16 @@ header {
 }
 
 .title-container {
-    min-width: 20%;
+    min-width: 10%;
+}
+
+#title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#logo {
+    width: 30px;
 }
 
 ul {
@@ -48,7 +57,8 @@ li {
     padding: 50px 0;
     width: 100vw;
     height: 150px;
-    background-color:lightslategrey;
+    background-color:aliceblue;
+    box-shadow: 0px 3px 5px 5px rgba(0,0,0,0.2);
     text-align: center;
 }
 
@@ -72,16 +82,23 @@ main {
     flex-grow: 1;
     flex-basis: 300px;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 10px;
     position: relative;
     text-align: center;
+    overflow: hidden;
+    transition: 0.3s;
 }
 
-img {
+.card:hover {
+    transform: scale(1.05);
+}
+
+.location-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 
 .location {
     width: 100%;
@@ -93,6 +110,8 @@ img {
 button {
     margin: 20px 0;
     padding: 10px;
+    border-radius: 10px;
+    background-color: azure;
 }
 
 /* ------ footer ------ */
