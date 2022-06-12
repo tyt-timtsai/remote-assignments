@@ -39,10 +39,21 @@ function toNumber(input){
     return arrayOfNumber;
 }
 
+/* 36進位由0~9 和 A~Z組成 ， A~Z 分別代表10~35 因此用parseInt去轉化字母在減去前面9個數 */
+function toNumber2(input){
+    let arrayOfNumber = [];
+    for (let i = 0; i < input.length; i++) {
+        arrayOfNumber.push(parseInt(input[i], 36)-9);
+    }
+    return arrayOfNumber;
+}
+
 let input1 = ['a', 'b', 'c', 'a', 'c', 'a', 'c'];
 console.log(countAandB(input1));
 console.log(toNumber(input1));
+console.log(toNumber2(input1));
 
 let input2 = ['e', 'd', 'c', 'd', 'e'];
 console.log(countAandB(input2));
 console.log(toNumber(input2));
+console.log(toNumber2(input2));
