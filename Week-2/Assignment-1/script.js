@@ -27,7 +27,6 @@ function max(numbers) {
         if(numbers[i] === target && position === -1){
             position = i
         }
-
     }
     return position;
     }
