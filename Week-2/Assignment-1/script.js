@@ -4,20 +4,23 @@ function max(numbers) {
     
     let maxNumber = 0;
 
-    for (let i = 0; i < numbers.length; i++) {
-        if(numbers[i]>maxNumber){
-            maxNumber = numbers[i];
-        }
-    }
-    return maxNumber;
+    // for (let i = 0; i < numbers.length; i++) {
+    //     if(numbers[i]>maxNumber){
+    //         maxNumber = numbers[i];
+    //     }
+    // }
+    // return maxNumber;
+
+    /* 後續研究MDN在Array methods時想到可以直接排序array，因為都是數字，再取最後一個就好了 */
+    const sortArray = numbers.sort();
+    return sortArray.pop();
     }
 
     function findPosition(numbers, target) {
     // your code here, for-loop method preferred
     /* 直觀：可以透過for-loop 加上 if statement 做判斷，回傳第一個比對相同的值的index，但看到最後一個console.log，不存在時要回傳-1，所以應該要先設定一個值為-1的變數，再去做覆蓋跟return */
-
+    /*
     let position = -1;
-
     for (let i = 0; i < numbers.length; i++) {
         // 這個寫法會讓target有重複時，無法取得第一個index
         // if(numbers[i] === target){
@@ -29,6 +32,12 @@ function max(numbers) {
         }
     }
     return position;
+     */
+
+    /*
+    因為重複的數字也要找第一個值，可以直接用Array method的indexOf找
+    */
+    return numbers.indexOf(target);
     }
     console.log(max([1, 2, 4, 5])); // should print 5
     console.log(max([5, 2, 7, 1, 6])); // should print 7
