@@ -93,6 +93,10 @@ main {
     transform: scale(1.05);
 }
 
+.hide {
+    display: none;
+}
+
 .location-photo {
     width: 100%;
     height: 100%;
