@@ -1,16 +1,17 @@
-const express = require("express");
+const express = require('express');
 
 const app = express();
+const port = 3000;
 
-app.get("/", (req, res) => {
-  //request, response
-  res.send("<h1>Hello, My Server!</h1>");
+//可以在第二個參數設定'pug'
+//但是在treehouse的專案練習過了，想練習看看ejs，了解一下兩個比較熱門的方法!
+app.set('view engine', 'ejs');
+
+app.get('/', (req, res) => {
+  res.render('index', { text: 'My Server!' });
 });
 
-app.get("/hello", (req, res) => {
-  res.send("<h1>Hello, JavaScript Developer!</h1>");
-});
-
-app.listen(3000, () => {
-  console.log("The application is running on localhost: 3000!");
+//在設定的port運行，同時log一個開始運行的訊息在server
+app.listen(port, () => {
+  console.log(`The application is running on localhost: ${port}!`);
 });
