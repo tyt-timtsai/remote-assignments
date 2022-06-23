@@ -11,6 +11,10 @@ app.get('/', (req, res) => {
   res.render('index', { text: 'My Server!' });
 });
 
+//設定 /data route
+const dataRouter = require('./routes/data');
+app.use('/data', dataRouter);
+
 //在設定的port運行，同時log一個開始運行的訊息在server
 app.listen(port, () => {
   console.log(`The application is running on localhost: ${port}!`);
