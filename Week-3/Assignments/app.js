@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+app.use(express.static('public'));
+
 //可以在第二個參數設定'pug'
 //但是在treehouse的專案練習過了，想練習看看ejs，了解一下兩個比較熱門的方法!
 app.set('view engine', 'ejs');

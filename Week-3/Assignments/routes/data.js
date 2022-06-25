@@ -8,7 +8,9 @@ router.get('/', (req, res) => {
 
   //判斷number的有無
   if (!number) {
-    res.send('Lack of Parameter');
+    console.log(req.query);
+    // res.send('Lack of Parameter');
+    res.send(req.query);
   }
 
   //判斷number是否為大於零的整數
