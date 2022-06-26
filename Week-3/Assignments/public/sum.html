@@ -33,7 +33,7 @@
             document.getElementById('result').innerHTML = xhr.responseText;
             console.log(xhr.responseText);
           } else {
-            console.log(xhr.status);
+            document.getElementById('result').innerHTML = xhr.status;
             console.log(xhr.readyState);
           }
         };
