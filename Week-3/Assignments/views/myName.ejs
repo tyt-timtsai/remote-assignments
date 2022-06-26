@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Name</title>
+  </head>
+  <body>
+    <% if(name){ %>
+    <h1>Hello ,<%= name %></h1>
+    <% } %>
+    <form action="/trackName" method="get" id="nameForm">
+      <% if(!name){ %>
+      <input type="text" id="name" name="name" placeholder="Type your name" />
+      <button type="submit">Submit</button>
+      <% } %>
+    </form>
+
+    <script>
+      const nameForm = document.getElementById('nameForm');
+      const xhr = new XMLHttpRequest();
+      nameForm.addEventListener('submit', (e) => {
+        name = document.getElementById('name').value;
+        xhr.open('GET', `/trackName?name=${name}`);
+        xhr.send();
+        // e.preventDefault();
+      });
+    </script>
+  </body>
+</html>
