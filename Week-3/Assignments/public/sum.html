@@ -8,26 +8,42 @@
   </head>
   <body>
     <h1>Hello, welcome to sum calculator.</h1>
-    <!-- <form action="./data" method="get"> -->
-    <form action="./sum.html" method="get">
+    <div id="result"></div>
+    <form method="get" id="form">
       <input type="number" name="number" id="userInput" />
-      <input type="submit" value="Calculate!" />
+      <button type="button" id="button" onclick="getInput()">Calculate!</button>
     </form>
+
     <script>
-      //AJAX
-      //啊！！！怎麼傳數據都是空的QQ~~~
-      //可是直接direct到 localhost:3000/data?number=10就可以抓到10，並顯示55....
+      const form = document.getElementById('form');
+      const button = document.getElementById('button');
+      let number = document.getElementById('userInput').value;
       const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          console.log(xhr.responseText);
-        } else {
-          console.log(xhr.status);
-          console.log(xhr.readyState);
-        }
-      };
-      xhr.open('GET', '/data');
-      xhr.send();
+
+      //button點擊後向後端請求
+      //但現在要用onclick才能發送，之後再試試看怎麼改成enter就觸發(可能是onsubmit)
+      function getInput() {
+        //取得輸入的數字
+        number = document.getElementById('userInput').value;
+        console.log(number);
+
+        //AJAX
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('result').innerHTML = xhr.responseText;
+            console.log(xhr.responseText);
+          } else {
+            console.log(xhr.status);
+            console.log(xhr.readyState);
+          }
+        };
+        xhr.open('GET', `/data?number=${number}`);
+        xhr.send();
+      }
+      // 在想說怎麼用preventDefault()處理form的submit...可能還需要試一下
+      //   form.addEventListener('submit', (e) => {
+      //     e.preventDefault();
+      //   });
     </script>
   </body>
 </html>
