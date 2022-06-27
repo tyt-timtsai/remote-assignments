@@ -1,0 +1,16 @@
+extends layout.pug 
+
+block content
+    section#content 
+        h2= text
+        if hint
+            p 
+                i Hint: #{hint}
+        else
+            p (There is no hint.)
+        a(href=`${id}?side=${sideToGo}`)= sideToGoText
+        br
+        a(href=`/cards`) Next Card
+        ul 
+        each color in colors
+            li= color
