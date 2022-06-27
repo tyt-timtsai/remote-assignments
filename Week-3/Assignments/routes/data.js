@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
   //判斷number是否為大於零的整數
   //原本嘗試了typeof / Number() / typeof + parseInt()
   //但用這些方法還沒找到如何解決number等於英文字母時，如何判斷成string，而不是number。
-  if (parseInt(number) > 0) {
+  else if (parseInt(number) > 0) {
     //先土法煉鋼，for loop去做總和
     //後續研究一下數字大時如何用空間換取時間，畢竟目前需要O(n)才可以
     let sum = 0;
