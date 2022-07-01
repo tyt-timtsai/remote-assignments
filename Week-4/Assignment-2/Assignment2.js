@@ -31,7 +31,6 @@ function render(data) {
     const name = document.createElement('h2');
     const nameContent = document.createTextNode(data[i].name);
     name.className = 'name';
-    console.log(data[i].name);
     name.appendChild(nameContent);
     li.appendChild(name);
 
