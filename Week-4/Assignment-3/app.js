@@ -3,8 +3,9 @@ require('dotenv').config();
 
 //express
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
+const bodyParser = require('body-parser');
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.set('view engine', 'ejs');
 
 const port = 3000;
@@ -28,16 +29,31 @@ db.connect((err) => {
 });
 
 //Insert User
-app.get('/adduser', (req, res) => {
+app.post('/adduser', urlencodedParser, (req, res) => {
   let post = { email: req.body.email, password: req.body.password };
   let sql = `INSERT INTO user SET ?`;
+  console.log(req.body);
+  let existEmail = db.query(
+    `SELECT * FROM user WHERE email = "${req.body.email}"`,
+    (err, result) => {
+      console.log(`result:${result}`);
+      if (result[0]) {
+        return result[0].email;
+      } else {
+        return null;
+      }
+    }
+  );
   db.query(sql, post, (err, result) => {
     if (err) {
       throw err;
+    } else if (existEmail === null) {
+      console.log(result);
+      res.redirect('/member');
+    } else if (existEmail) {
+      res.send('email exist');
+      //   res.redirect('/');
     }
-    console.log(result);
-    res.send('Posted ...');
-    setTimeout(redirect('/', 2000));
   });
 });
 

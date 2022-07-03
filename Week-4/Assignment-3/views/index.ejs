@@ -48,7 +48,7 @@
       const SignIn = document.getElementById('Sign-in');
       const xhr = new XMLHttpRequest();
       SignIn.addEventListener('submit', (e) => {
-        xhr.open('POST', `http://localhost:3000?email=${signInEmail}`);
+        xhr.open('POST', `/adduser`);
         xhr.send();
       });
       const SignUp = () => {
