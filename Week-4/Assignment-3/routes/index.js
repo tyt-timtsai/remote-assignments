@@ -3,7 +3,6 @@ const router = express.Router();
 
 //render home page
 router.get('/', (req, res) => {
-  console.log(req.body);
   res.render('index.ejs');
 });
 
