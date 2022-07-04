@@ -3,20 +3,8 @@ const router = express.Router();
 
 //render home page
 router.get('/', (req, res) => {
-  // console.log(req.body.email);
-  // console.log(`query:${req.query}`);
+  console.log(req.body);
   res.render('index.ejs');
-  // res.redirect('/');
-});
-
-router.post('/', (req, res) => {
-  // console.log(req.body.email);
-  // console.log(req.query);
-  // console.log(`post:${req.query.email}`);
-
-  res.render('index.ejs');
-  // res.render('index');
-  // res.redirect('/');
 });
 
 //render member page

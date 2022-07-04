@@ -4,11 +4,11 @@ require('dotenv').config();
 //express
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.set('view engine', 'ejs');
-
 const port = 3000;
+
+// const jsonParser = express.json();
+const urlencodedParser = express.urlencoded({ extended: false });
 
 //MySQL
 const mysql = require('mysql2');
@@ -29,64 +29,73 @@ db.connect((err) => {
 });
 
 //Insert User
-app.post('/adduser', urlencodedParser, (req, res) => {
-  let post = { email: req.body.email, password: req.body.password };
+app.get('/adduser', (req, res) => {
+  let post = { email: 'qwe123@gmail.com', password: 'qwe123' };
   let sql = `INSERT INTO user SET ?`;
-  console.log(req.body);
-  let existEmail = db.query(
-    `SELECT * FROM user WHERE email = "${req.body.email}"`,
-    (err, result) => {
-      console.log(`result:${result}`);
-      if (result[0]) {
-        return result[0].email;
-      } else {
-        return null;
-      }
-    }
-  );
   db.query(sql, post, (err, result) => {
     if (err) {
       throw err;
-    } else if (existEmail === null) {
-      console.log(result);
-      res.redirect('/member');
-    } else if (existEmail) {
-      res.send('email exist');
-      //   res.redirect('/');
     }
+    res.send('Added 1 user...');
   });
 });
 
-//Get Users
-app.get('/getuser', (req, res) => {
-  let sql = `SELECT * FROM user `;
-  //   db.query(sql, (err, result) => {
-  //     if (err) {
-  //       throw err;
-  //     }
-  //     console.log(result);
-  //     res.send('Posted fetched...');
-  //   });
-  db.query(`SELECT * FROM user WHERE email = "123@gmail.com"`, (err, result) => {
-    if (err) {
-      throw err;
-    }
-    console.log(result[0].email);
-    res.send('Posted fetched...');
-  });
+//Sign up
+app.post('/signup', urlencodedParser, (req, res) => {
+  let post = { email: req.body.email, password: req.body.password };
+  let body = JSON.stringify(req.body);
+
+  // console.log(`body:${req.body.email}`);
+  let input = JSON.parse(body).email;
+  if (input) {
+    db.query(`SELECT password FROM user WHERE email = "${input}"`, (err, result) => {
+      if (result[0]) {
+        console.log('Account exist.');
+        // req.flash('error_msg', 'Account is already exist.');
+        res.redirect('/');
+        // res.render('/', { error_msg: 'Account is already exist.' });
+      } else {
+        console.log('Account does not exist');
+        let sql = `INSERT INTO user SET ?`;
+
+        db.query(sql, post, (err, result) => {
+          if (err) {
+            throw err;
+          }
+          console.log(`result : ${result}`);
+          res.redirect('/member');
+        });
+      }
+    });
+  }
 });
 
-//Get Single User
-app.get('/getuser/:id', (req, res) => {
-  let sql = `SELECT * FROM user WHERE email = ${req.params.id} `;
-  db.query(sql, (err, result) => {
-    if (err) {
-      throw err;
-    }
-    console.log(result);
-    res.send('Posted fetched...');
-  });
-});
+// //Sign in
+// app.post('/signin', urlencodedParser, (req, res) => {
+//   let input = { email: req.body.email, password: req.body.password };
+//   console.log(`email: ${input.email}`);
+//   let sql = `SELECT * FROM user WHERE email = ${input.email}`;
+
+//   //Sign in part
+//   db.query(sql, (err, result) => {
+//     console.log('result[0]');
+//     console.log(result[0]);
+//     console.log(result[0].password);
+//     console.log(post.password);
+//     if (result[0]) {
+//       if (result[0].password === post.password) {
+//         console.log('password correct');
+//         res.redirect('/member');
+//       } else {
+//         console.log('password incorrect');
+//         res.send('Password incorrect');
+//       }
+//     } else {
+//       console.log('account does not exist');
+//       res.send('Email not exist, please sign up first.');
+//     }
+//   });
+// });
 
 //Set home page
 const mainRoutes = require('./routes');
@@ -101,7 +110,8 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   res.locals.error = err;
-  res.status(err.status);
+  const status = err.status || 500;
+  res.status(status);
   res.render('error');
 });
 
