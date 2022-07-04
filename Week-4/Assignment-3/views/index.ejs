@@ -49,19 +49,18 @@
       const xhr = new XMLHttpRequest();
       const signUp = document.getElementById('sign-up');
       signUp.addEventListener('submit', () => {
-        // xhr.onreadystatechange = function () {
-        //   if (xhr.readyState === 4 && xhr.status === 200) {
-        //     document.getElementById('sign-up-error').innerHTML = xhr.responseText;
-        //     console.log(xhr.responseText);
-        //     console.log(email.value);
-        //     console.log(password.value);
-        //   } else {
-        //     console.log(xhr.responseText);
-        //     console.log(email.value);
-        //     console.log(password.value);
-        //   }
-        // };
-
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById('sign-up-error').innerHTML = xhr.responseText;
+            console.log(xhr.responseText);
+            console.log(email.value);
+            console.log(password.value);
+          } else {
+            console.log(xhr.responseText);
+            console.log(email.value);
+            console.log(password.value);
+          }
+        };
         xhr.open('POST', '/signup');
         xhr.send();
       });

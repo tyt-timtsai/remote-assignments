@@ -71,31 +71,35 @@ app.post('/signup', urlencodedParser, (req, res) => {
 });
 
 // //Sign in
-// app.post('/signin', urlencodedParser, (req, res) => {
-//   let input = { email: req.body.email, password: req.body.password };
-//   console.log(`email: ${input.email}`);
-//   let sql = `SELECT * FROM user WHERE email = ${input.email}`;
+app.post('/signin', urlencodedParser, (req, res) => {
+  let input = { email: req.body.email, password: req.body.password };
+  console.log(`email: ${input.email}`);
+  let sql = `SELECT * FROM user WHERE email = '${input.email}'`;
+  console.log(sql);
 
-//   //Sign in part
-//   db.query(sql, (err, result) => {
-//     console.log('result[0]');
-//     console.log(result[0]);
-//     console.log(result[0].password);
-//     console.log(post.password);
-//     if (result[0]) {
-//       if (result[0].password === post.password) {
-//         console.log('password correct');
-//         res.redirect('/member');
-//       } else {
-//         console.log('password incorrect');
-//         res.send('Password incorrect');
-//       }
-//     } else {
-//       console.log('account does not exist');
-//       res.send('Email not exist, please sign up first.');
-//     }
-//   });
-// });
+  //Sign in part
+  db.query(sql, (err, result) => {
+    console.log('result[0]');
+    console.log(result[0]);
+    console.log(input.password);
+    if (result[0]) {
+      if (result[0].password === input.password) {
+        console.log('password correct');
+        res.redirect('/member');
+      } else {
+        console.log('password incorrect');
+        res.send('Password incorrect');
+        // res.redirect('/');
+      }
+    } else {
+      console.log('account does not exist');
+      res.send('Email not exist, please sign up first.');
+      // res.redirect('/');
+      // res.render('/');
+    }
+  });
+  // res.send(input);
+});
 
 //Set home page
 const mainRoutes = require('./routes');
