@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+  </head>
+  <body>
+    <!-- Sign up -->
+    <h2>Sign up</h2>
+    <form action="/" method="post">
+      <div>
+        <label for="email">Email : </label>
+        <input type="email" name="email" id="sign-up-email" required />
+      </div>
+      <div>
+        <label for="password">Password : </label>
+        <input type="password" name="password" id="sign-up-password" required />
+      </div>
+      <button type="submit" onsubmit="SignUp()">Sign up</button>
+    </form>
+    <!-- Sign in -->
+    <h2>Sign in</h2>
+    <form action="/" method="post">
+      <div>
+        <label for="email">Email : </label>
+        <input type="email" name="email" id="sign-in-email" required />
+      </div>
+      <div>
+        <label for="password">Password : </label>
+        <input type="password" name="password" id="sign-in-password" required />
+      </div>
+      <button type="submit">Sign in</button>
+    </form>
+
+    <!-- client js -->
+    <script>
+      // const form = document.getElementById('form');
+      // const button = document.getElementById('button');
+
+      let signUpEmail = document.getElementById('sign-up-email').value;
+      let signUpPassword = document.getElementById('sign-up-password').value;
+      let signInEmail = document.getElementById('sign-in-email').value;
+      let signInPassword = document.getElementById('sign-in-password').value;
+
+      //button點擊後向後端請求
+      const SignUp = () => {
+        Axios.post(`http://localhost:3000/member`, {
+          email: signUpEmail,
+          password: signUpPassword,
+        }).then((response) => {
+          console.log(response);
+        });
+      };
+    </script>
+  </body>
+</html>
